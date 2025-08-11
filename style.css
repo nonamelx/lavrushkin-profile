@@ -1,0 +1,185 @@
+:root {
+    --bg-color: #101010;
+    --text-color: #CCCCCC;
+    --accent-color: #E0E0E0;
+    --glass-bg: rgba(26, 26, 26, 0.7);
+    --border-color: rgba(224, 224, 224, 0.15);
+    --success-color: #2E7D32;
+    --redirect-bg: rgba(16, 16, 16, 0.95);
+    --redirect-glow: #25D366;
+}
+body {
+    font-family: 'IBM Plex Mono', monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 40px rgba(224, 224, 224, 0.1);
+}
+.section-title {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-color);
+    text-shadow: 0 0 10px rgba(224, 224, 224, 0.3);
+}
+.highlight {
+    color: var(--accent-color);
+    font-weight: 500;
+}
+.animated-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animated-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Loader Styles --- */
+#loader {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    transition: opacity 0.5s ease-out;
+}
+#loader.glitch {
+    animation: glitch-bg 0.4s linear;
+}
+.loader-content {
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+.loader-logo {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    animation: text-flicker 3s linear infinite;
+}
+.loader-status {
+    height: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+.loader-bar-container {
+    width: 100%;
+    height: 4px;
+    background-color: rgba(224, 224, 224, 0.2);
+}
+.loader-bar {
+    width: 0%;
+    height: 100%;
+    background-color: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+}
+@keyframes text-flicker {
+    0% { opacity: 0.5; } 5% { opacity: 1; } 10% { opacity: 0.7; } 15% { opacity: 1; }
+    25% { opacity: 0.5; } 30% { opacity: 1; } 100% { opacity: 1; }
+}
+@keyframes glitch-bg {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+/* --- Notification Styles --- */
+.notification {
+    animation: slideIn 0.5s forwards, slideOut 0.5s 2.5s forwards;
+    border-left-width: 4px;
+    border-left-color: var(--success-color);
+    box-shadow: 0 0 20px rgba(46, 125, 50, 0.4);
+}
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; }
+}
+
+/* --- Timeline Styles --- */
+.timeline { position: relative; }
+.timeline::before {
+    content: ''; position: absolute; left: 0; top: 1rem; bottom: 1rem; width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--accent-color), transparent); opacity: 0.3;
+}
+.timeline-item { position: relative; padding-left: 2rem; }
+.timeline-item::before {
+    content: ''; position: absolute; left: -4px; top: 1.5rem; transform: translateY(-50%);
+    width: 10px; height: 10px; border-radius: 50%; background-color: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-color);
+}
+
+/* --- Skill Item Styles --- */
+.skill-item { opacity: 0; transform: scale(0.5); animation: popIn 0.5s forwards; }
+@keyframes popIn { to { opacity: 1; transform: scale(1); } }
+
+/* --- Telegram Redirect Screen --- */
+.redirect-screen {
+    position: fixed; inset: 0; background: var(--redirect-bg); backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); z-index: 10000; display: flex; align-items: center;
+    justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.redirect-screen.visible { opacity: 1; pointer-events: all; }
+.redirect-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--redirect-glow) 1px, transparent 1px), linear-gradient(to right, var(--redirect-glow) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0;
+    animation: grid-fade-in 1s forwards;
+}
+.redirect-content { text-align: center; }
+.redirect-target {
+    width: 100px; height: 100px; position: relative; margin: 0 auto 1.5rem auto;
+    animation: target-spin 4s linear infinite;
+}
+.redirect-target div {
+    position: absolute; border: 2px solid var(--redirect-glow);
+    width: 30px; height: 30px;
+}
+.redirect-target div:nth-child(1) { top: 0; left: 0; border-right: none; border-bottom: none; animation: target-corner-1 1.5s ease-in-out forwards; }
+.redirect-target div:nth-child(2) { top: 0; right: 0; border-left: none; border-bottom: none; animation: target-corner-2 1.5s ease-in-out forwards; }
+.redirect-target div:nth-child(3) { bottom: 0; left: 0; border-right: none; border-top: none; animation: target-corner-3 1.5s ease-in-out forwards; }
+.redirect-target div:nth-child(4) { bottom: 0; right: 0; border-left: none; border-top: none; animation: target-corner-4 1.5s ease-in-out forwards; }
+.redirect-text {
+    font-size: 1.25rem; color: var(--accent-color); text-shadow: 0 0 10px var(--redirect-glow);
+    opacity: 0; animation: text-fade-in 1s 0.5s forwards;
+}
+
+@keyframes grid-fade-in { from { opacity: 0; } to { opacity: 0.1; } }
+@keyframes target-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes text-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes target-corner-1 { from { top: 50%; left: 50%; } to { top: 0; left: 0; } }
+@keyframes target-corner-2 { from { top: 50%; right: 50%; } to { top: 0; right: 0; } }
+@keyframes target-corner-3 { from { bottom: 50%; left: 50%; } to { bottom: 0; left: 0; } }
+@keyframes target-corner-4 { from { bottom: 50%; right: 50%; } to { bottom: 0; right: 0; } }
