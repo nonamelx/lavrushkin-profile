@@ -98,11 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         redirectScreen.classList.add('visible');
         setTimeout(() => {
-            window.open(telegramLink.href, '_blank');
-            setTimeout(() => {
-                 redirectScreen.classList.remove('visible');
-            }, 500);
-        }, 2000); // Увеличена задержка для полной анимации
+            // ИЗМЕНЕНО: Прямое перенаправление вместо window.open для лучшей совместимости
+            window.location.href = telegramLink.href;
+        }, 2000); // Задержка для полной анимации
     });
 
     // --- PARTICLE BACKGROUND ---
