@@ -1,24 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- LOADER ---
+    // --- WATCH DOGS LOADER ---
     const loader = document.getElementById('loader');
-    const loaderTextEl = document.getElementById('loader-text');
-    const loaderText = "SYSTEM ONLINE. WELCOME.";
-    let charIndex = 0;
+    const loaderStatus = document.getElementById('loader-status');
+    const loaderBar = document.getElementById('loader-bar');
+    const statusMessages = [
+        "INITIATING KERNEL...",
+        "DECRYPTING PROFILES...",
+        "LOADING INTERACTIVE UI...",
+        "SYSTEM ONLINE.",
+        "WELCOME."
+    ];
+    let currentMessageIndex = 0;
+    let progress = 0;
 
-    function typeLoaderText() {
-        if (charIndex < loaderText.length) {
-            loaderTextEl.textContent += loaderText.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeLoaderText, 60);
+    function updateLoader() {
+        if (currentMessageIndex < statusMessages.length) {
+            loaderStatus.textContent = statusMessages[currentMessageIndex];
+            progress = (currentMessageIndex + 1) / statusMessages.length * 100;
+            loaderBar.style.width = `${progress}%`;
+            
+            if(currentMessageIndex === statusMessages.length - 1) {
+                loaderStatus.style.animation = 'text-flicker 1.5s linear forwards';
+            }
+
+            currentMessageIndex++;
+            // Ускоряем смену сообщений
+            setTimeout(updateLoader, 300 + Math.random() * 150);
         } else {
-             setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 500);
-            }, 300);
+            // Добавляем глитч-эффект перед закрытием
+            setTimeout(() => {
+                loader.classList.add('glitch');
+                // Убираем глитч и скрываем загрузчик
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.style.display = 'none', 500);
+                }, 400); // Длительность глитч-анимации
+            }, 500);
         }
     }
-    typeLoaderText();
-
+    updateLoader();
 
     // --- SCROLL ANIMATIONS ---
     const observer = new IntersectionObserver((entries) => {
@@ -34,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // --- SKILLS ANIMATION ---
-    const skills = ['VIP Client Management', 'Conflict Resolution', 'Retention & Loyalty', 'Personalized Service', 'Data Analysis (Python)', 'Strategic Planning'];
+    const skills = ['Управление VIP-клиентами', 'Разрешение конфликтов', 'Оптимизация процессов', 'Наставничество', 'CRM & Helpdesk', 'Автоматизация (Python)'];
     const skillsGrid = document.getElementById('skills-grid');
     skills.forEach((skill, index) => {
         const skillEl = document.createElement('div');
@@ -42,6 +62,47 @@ document.addEventListener('DOMContentLoaded', () => {
         skillEl.textContent = skill;
         skillEl.style.animationDelay = `${index * 100}ms`;
         skillsGrid.appendChild(skillEl);
+    });
+
+    // --- EMAIL COPY ---
+    const emailButton = document.getElementById('email-btn');
+    const notificationContainer = document.getElementById('notification-container');
+    const email = "who.lx@icloud.com";
+
+    emailButton.addEventListener('click', () => {
+        const textarea = document.createElement('textarea');
+        textarea.value = email;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+
+        const notification = document.createElement('div');
+        notification.className = 'glass-card p-4 notification';
+        notification.innerHTML = `
+            <p class="font-bold">Успешно скопировано!</p>
+            <p class="text-sm text-gray-400">${email}</p>
+        `;
+        notificationContainer.appendChild(notification);
+
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    });
+
+    // --- TELEGRAM REDIRECT ---
+    const telegramLink = document.getElementById('telegram-link');
+    const redirectScreen = document.getElementById('telegram-redirect');
+
+    telegramLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        redirectScreen.classList.add('visible');
+        setTimeout(() => {
+            window.open(telegramLink.href, '_blank');
+            setTimeout(() => {
+                 redirectScreen.classList.remove('visible');
+            }, 500);
+        }, 2000); // Увеличена задержка для полной анимации
     });
 
     // --- PARTICLE BACKGROUND ---

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio // Aleksandr Lavrushkin</title>
+    <title>Resume</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,63 +12,93 @@
 </head>
 <body class="text-base md:text-lg">
     <canvas id="particle-canvas"></canvas>
+    
+    <!-- Loader -->
     <div id="loader">
-        <span id="loader-text"></span><span class="blinking-cursor">_</span>
+        <div class="loader-content">
+            <div class="loader-logo">[ ctOS BOOT SEQUENCE ]</div>
+            <div id="loader-status" class="loader-status"></div>
+            <div class="loader-bar-container">
+                <div id="loader-bar" class="loader-bar"></div>
+            </div>
+        </div>
     </div>
+
+    <!-- Telegram Redirect Screen -->
+    <div id="telegram-redirect" class="redirect-screen">
+        <div class="redirect-content">
+            <svg class="redirect-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="96px" height="96px"><path fill="#29b6f6" d="M24,4C13,4,4,13,4,24s9,20,20,20s20-9,20-20S35,4,24,4z"/><path fill="#fff" d="M34,15l-3.7,15.8c-0.2,0.8-0.7,1-1.2,0.6l-5-3.7l-2.4,2.3c-0.3,0.3-0.5,0.5-0.9,0.5l0.4-5.1l9.5-8.9 c0.4-0.4-0.1-0.6-0.6-0.2l-11.7,7.4l-4.9-1.5c-0.8-0.2-0.8-0.8,0.2-1.2L32.9,14C33.6,14.7,34.2,14.8,34,15z"/></svg>
+            <p class="redirect-text">Соединение с Telegram...</p>
+        </div>
+    </div>
+
+    <div id="notification-container" class="fixed top-5 right-5 z-50 space-y-3"></div>
 
     <div class="container mx-auto px-4 py-12 md:py-20 max-w-7xl space-y-28">
 
         <header class="text-center min-h-screen flex flex-col justify-center items-center animated-section">
-            <h1 id="name-header" class="text-5xl md:text-8xl font-extrabold uppercase tracking-wider" style="font-family: 'Exo 2', sans-serif;">Aleksandr Lavrushkin</h1>
+            <h1 id="name-header" class="text-5xl md:text-8xl font-extrabold uppercase tracking-wider" style="font-family: 'Exo 2', sans-serif;">Александр Лаврушкин</h1>
             <p id="role-header" class="text-xl md:text-2xl text-accent-color mt-4 opacity-80">VIP & Client Relations Manager</p>
             <div class="mt-8">
                 <div class="border border-border-color rounded-full px-6 py-2 text-lg">
-                    Salary Expectation: <span class="highlight font-bold">$1,300+</span>
+                    Желаемый оклад: <span class="highlight font-bold">$1,300+</span>
                 </div>
             </div>
         </header>
 
         <section class="animated-section">
-            <h2 class="section-title text-center mb-12">PHILOSOPHY</h2>
+            <h2 class="section-title text-center mb-12">ФИЛОСОФИЯ</h2>
             <div class="glass-card p-8 md:p-12">
                 <p class="leading-relaxed text-center max-w-4xl mx-auto">
-                    I believe that working with VIP clients is not just about solving problems, but about <span class="highlight">building long-term partnerships</span>. My goal is to anticipate expectations by providing exclusive service based on a deep understanding of client needs and data. I turn standard support into a strategic advantage that directly impacts the <span class="highlight">loyalty and retention</span> of the company's most valuable assets.
+                    Я убежден, что работа с VIP-клиентами - это не просто решение проблем, а <span class="highlight">построение долгосрочных партнерских отношений</span>. Моя цель - предвосхищать ожидания, предоставляя эксклюзивный сервис, основанный на глубоком понимании потребностей клиента и данных. Я превращаю стандартную поддержку в стратегическое преимущество, которое напрямую влияет на <span class="highlight">лояльность и удержание</span> самых ценных активов компании.
                 </p>
             </div>
         </section>
 
         <section class="animated-section">
-            <h2 class="section-title text-center mb-12">CAREER PATH</h2>
+            <h2 class="section-title text-center mb-12">КАРЬЕРНЫЙ ПУТЬ</h2>
             <div class="timeline space-y-12">
                 <div class="timeline-item">
                     <div class="glass-card p-8 md:p-10">
-                        <h3 class="text-2xl font-bold text-accent-color">VIP Account Manager & L2 Support Lead</h3>
-                        <p class="text-gray-400 mb-4">International iGaming Platform (under NDA) // August 2024 – Present</p>
+                        <h3 class="text-2xl font-bold text-accent-color">VIP Manager / L2 Support (EN) </h3>
+                        <p class="text-gray-400 mb-4">Международная iGaming Платформа (по NDA) // Октябрь 2024 – Настоящее время</p>
                         <ul class="list-disc list-inside space-y-3">
-                            <li>Built trusting relationships with VIP clients, which led to increased loyalty and a <span class="highlight">15%</span> improvement in retention rates.</li>
-                            <li>Optimized the team's internal processes by creating user-friendly analytical tables and tools, which boosted the department's efficiency.</li>
-                            <li>Assisted the team lead in resolving complex VIP segment incidents by implementing processes that reduced the average response time (SLA) by <span class="highlight">40%</span>.</li>
+                            <li>Проявлял лидерские качества, помогая руководителю в управлении командой, разрешении жалоб (complaints) и построении эффективного взаимодействия между отделами.</li>
+                            <li>Выстраивал доверительные отношения с VIP-клиентами, что привело к повышению их лояльности и увеличению уровня удержания на <span class="highlight">15%</span>.</li>
+                            <li>Оптимизировал внутренние процессы команды, создавая удобные аналитические таблицы и инструменты, что повысило эффективность работы отдела.</li>
+                            <li>Вел коммуникацию с ключевыми клиентами преимущественно на <span class="highlight">английском языке</span>.</li>
                         </ul>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="glass-card p-8 md:p-10">
-                        <h3 class="text-2xl font-bold text-accent-color">Key Partner Specialist (L2-L3)</h3>
-                        <p class="text-gray-400 mb-4">Yandex Pro // April 2022 – September 2023</p>
+                        <h3 class="text-2xl font-bold text-accent-color">L1 Support (EN) </h3>
+                        <p class="text-gray-400 mb-4">JetAdmin // Ноябрь 2023 - Май 2024</p>
                         <ul class="list-disc list-inside space-y-3">
-                            <li>Acted as a lead mentor, developing a training program that onboarded over <span class="highlight">60</span> specialists, creating a dedicated team for premium partner support.</li>
-                            <li>Analyzed KPIs and performance metrics to identify growth areas, consistently achieving top rankings and implementing best practices within the department.</li>
-                             <li>Initiated and conducted a series of exclusive webinars and workshops for key partners, strengthening their loyalty and leading to a <span class="highlight">10-15%</span> increase in operational performance.</li>
+                            <li>Оказывал техническую поддержку пользователям no-code платформы, преимущественно на <span class="highlight">английском языке</span>.</li>
+                            <li>Помогал клиентам в настройке приложений и решении проблем через чат и email.</li>
+                            <li>Документировал частые вопросы и пополнял базу знаний для ускорения решения проблем.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="glass-card p-8 md:p-10">
+                        <h3 class="text-2xl font-bold text-accent-color">(L1/L2) Support (Voice - RUS)</h3>
+                        <p class="text-gray-400 mb-4">Yandex Pro // Май 2022 – Сентябрь 2023</p>
+                        <ul class="list-disc list-inside space-y-3">
+                            <li>Выступал в роли ведущего наставника, разработав программу обучения, через которую прошло более <span class="highlight">100+</span> специалистов.</li>
+                            <li>Анализировал KPI и метрики производительности для выявления зон роста, что позволило стабильно занимать лидирующие позиции и внедрять лучшие практики в отделе.</li>
+                             <li>Разработал систему мотивации и геймификации для повышения вовлеченности и эффективности команды поддержки.</li>
                         </ul>
                     </div>
                 </div>
                 <div class="timeline-item">
                      <div class="glass-card p-8 md:p-10">
-                        <h3 class="text-2xl font-bold text-accent-color">Senior System Administrator / Community Manager</h3>
-                        <p class="text-gray-400 mb-4">Megadrom / True Gamers // 2020 – 2022</p>
+                        <h3 class="text-2xl font-bold text-accent-color">Старший системный администратор / Менеджер сообщества</h3>
+                        <p class="text-gray-400 mb-4">Megadrom / True Gamers // 2020 - 2022</p>
                         <ul class="list-disc list-inside space-y-3">
-                            <li>Managed an IT infrastructure of <span class="highlight">120+</span> gaming stations, ensuring 99.9% uptime during peak loads and creating a flawless gaming experience for customers.</li>
-                            <li>Developed and executed a community engagement strategy, organizing over <span class="highlight">20</span> tournaments, which grew the loyal customer base by 30% and strengthened the brand in the local market.</li>
+                            <li>Управлял IT-инфраструктурой из <span class="highlight">120+</span> игровых станций, обеспечивая 99.9% аптайм.</li>
+                            <li>Разработал и реализовал стратегию по работе с сообществом, организовав более <span class="highlight">20</span> турниров.</li>
                         </ul>
                     </div>
                 </div>
@@ -76,38 +106,54 @@
         </section>
 
         <section class="animated-section">
-            <h2 class="section-title text-center mb-12">CORE COMPETENCIES</h2>
+            <h2 class="section-title text-center mb-12">ЛИЧНОСТЬ</h2>
+            <div class="glass-card p-8 md:p-12">
+                <p class="leading-relaxed max-w-4xl mx-auto">
+                    За пределами работы я - человек, который обожает решать головоломки, будь то написание скрипта для автоматизации рутины или погружение в мир кибербезопасности. Я вижу код как инструмент для творчества и оптимизации. Это увлечение научило меня подходить к любой задаче системно и искать нестандартные решения.
+                    <br><br>
+                    Моя большая мечта - <span class="highlight">путешествовать и открывать новые культуры</span>. Именно она мотивирует меня постоянно совершенствовать английский. Я верю, что готовность брать на себя ответственность, быстро учиться и не бояться сложных задач - это ключ не только к профессиональному, но и к личностному росту.
+                </p>
+            </div>
+        </section>
+
+        <section class="animated-section">
+            <h2 class="section-title text-center mb-12">КЛЮЧЕВЫЕ КОМПЕТЕНЦИИ</h2>
             <div id="skills-grid" class="grid grid-cols-2 md:grid-cols-3 gap-6">
                 <!-- Skills will be injected by JS -->
             </div>
         </section>
         
         <section class="animated-section">
-            <h2 class="section-title text-center mb-12">ADDITIONAL INFO</h2>
+            <h2 class="section-title text-center mb-12">ДОПОЛНИТЕЛЬНО</h2>
             <div class="glass-card p-8 md:p-12">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
                     <div class="md:col-span-1">
-                        <h4 class="text-xl font-bold mb-2 text-accent-color opacity-80">EDUCATION</h4>
-                        <p>Ural Federal University (UrFU)</p>
-                        <p class="text-gray-400">Faculty: Applied Informatics in Business Processes</p>
-                        <p class="text-sm text-gray-400">Bachelor's Degree, 2020-2024</p>
+                        <h4 class="text-xl font-bold mb-2 text-accent-color opacity-80">ОБРАЗОВАНИЕ</h4>
+                        <p>Уральский федеральный университет (УрФУ)</p>
+                        <p class="text-gray-400">Факультет: Прикладная информатика в бизнес процессах</p>
+                        <p class="text-sm text-gray-400">Бакалавр, 2020-2024</p>
                     </div>
                     <div class="md:col-span-1">
-                        <h4 class="text-xl font-bold mb-2 text-accent-color opacity-80">LANGUAGES</h4>
-                        <p>Russian (Native)</p>
-                        <p>English (B2)</p>
+                        <h4 class="text-xl font-bold mb-2 text-accent-color opacity-80">ЯЗЫКИ</h4>
+                        <p>Русский (Родной)</p>
+                        <p>Английский (B2)</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <footer class="text-center py-12 animated-section">
-             <h2 class="section-title text-center mb-8">CONTACT</h2>
+             <h2 class="section-title text-center mb-8">СВЯЗЬ</h2>
              <div class="glass-card p-8 max-w-md mx-auto">
-                <p>Ready to discuss how my experience can strengthen your team.</p>
-                <a href="mailto:who.lx@icloud.com" class="inline-block mt-4 text-accent-color text-2xl border-b-2 border-transparent hover:border-accent-color transition-all duration-300">
-                    who.lx@icloud.com
-                </a>
+                <p>Готов обсудить, как мой опыт может усилить вашу команду.</p>
+                <div class="flex justify-center items-center space-x-6 mt-4">
+                    <button id="email-btn" class="text-accent-color text-2xl border-b-2 border-transparent hover:border-accent-color transition-all duration-300">
+                        EMAIL
+                    </button>
+                    <a id="telegram-link" href="https://t.me/meowpeow17" target="_blank" rel="noopener noreferrer" class="text-accent-color text-2xl border-b-2 border-transparent hover:border-accent-color transition-all duration-300">
+                        TELEGRAM
+                    </a>
+                </div>
              </div>
         </footer>
     </div>
